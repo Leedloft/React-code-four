@@ -1,5 +1,11 @@
 import React from "react";
 import styles from './style.module.css'
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete'
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import TextField from '@mui/material/TextField';
 
 
 const DATA = [
@@ -19,6 +25,7 @@ export default class Input extends React.Component {
     }
   }
 
+
   handleSubmitForm = (e) => {
     e.preventDefault()
     const copiedArr = [...this.state.postList]
@@ -27,16 +34,15 @@ export default class Input extends React.Component {
       body: '',
       title: this.state.postTitle
     })
-    this.setState({postList: copiedArr})
-    this.setState({postTitle: ''})
+    this.setState({ postList: copiedArr })
+    this.setState({ postTitle: '' })
   }
 
   handleDelete = (id) => {
-    console.log(id, 'id')
     const copiedArr = [...this.state.postList]
     const filteredArr = copiedArr.filter(i => i.id !== id)
-    console.log(copiedArr)
-    this.setState({postList: filteredArr})
+    console.log(filteredArr)
+    this.setState({ postList: filteredArr })
   }
 
   handleChangeInput = e => {
@@ -44,32 +50,36 @@ export default class Input extends React.Component {
       postTitle: e.target.value
     })
   }
- 
   render() {
-    console.log(this.state, 'state input component')
     return (
-     <div  className={styles.container}>
-      <div  className={styles.input_add}>
-       <form onSubmit={this.handleSubmitForm}>
-         <input
-         className={styles.input_value}
-           value={this.state.postTitle}
-           type="text"
-           placeholder='enter title'
-           onChange={this.handleChangeInput}
-         />
-         <button className={styles.button_add} type='submit'>add</button>
-       </form>
-       </div>
-       {this.state.postList.map((item) => {
-         return (
-           <div className={styles.added_text} key={item.id}>
-             {item.title}
-             <button className={styles.delete_button} onClick = {()=> this.handleDelete (item.id)}>Delete</button>
-           </div>
-         )
-       })}
-     </div>
+      <div className={styles.container}>
+        <div className={styles.input_add}>
+          <form onSubmit={this.handleSubmitForm}>
+          <TextField id="outlined-basic" label="Outlined" variant="outlined" 
+              className={styles.input_value}
+              value={this.state.postTitle}
+              type="text"
+              placeholder='enter title'
+              onChange={this.handleChangeInput}
+            />
+            <Box className={styles.add_icon_box} sx={{ '& > :not(style)': { m: 1 } }}>
+              <Fab size="small" color="secondary" type='submit' aria-label="add">
+                <AddIcon />
+              </Fab>
+              </Box>
+          </form>
+        </div>
+        {this.state.postList.map((item) => {
+          return (
+            <div className={styles.added_text} key={item.id}>
+              {item.title}
+              <Button className={styles.delete_button} onClick={() => this.handleDelete(item.id)} color="secondary" size="small" variant="outlined" startIcon={<DeleteIcon />}>
+                Delete
+              </Button>
+            </div>
+          )
+        })}
+      </div>
     )
   }
 }

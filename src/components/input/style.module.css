@@ -24,21 +24,36 @@
     padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
+    color: black;
     border-radius: 5px;
-    border: 1px solid rgb(5, 5, 65);
+    border: 1px solid #9c27b0;
+    background: #9c27b0;
+}
+.input_value::placeholder{
+    color: white;
 }
 .added_text {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid black;
     border-radius: 5px;
     line-height: 60px;
     color: green;
     margin-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.added_text:hover {
+    background-color: #431322fa;
+    color: white;
 }
 .delete_button{
     background-color: rgba(12, 97, 243, 0.825);
     border: 1px solid rgba(12, 97, 243, 0.825);
     border-radius: 5px;
+    color: green;
+}
+.add_icon_box{
+    display: inline;
 }
